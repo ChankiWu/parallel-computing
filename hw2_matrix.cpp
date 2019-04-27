@@ -6,7 +6,7 @@ using namespace std;
 using matrix = vector<vector<int> >;
 
 // maximum size of matrix 
-#define MAX 50
+#define MAX 1000
 
 matrix matA(MAX, vector<int>(MAX, 0));
 matrix matB(MAX, vector<int>(MAX, 0));
@@ -49,8 +49,10 @@ int main(){
         } 
     } 
 
+    /*
     printMatrix(matA);
     printMatrix(matB);
+    */
 
     clock_gettime(CLOCK_MONOTONIC, &start);
     //code
@@ -58,7 +60,7 @@ int main(){
 
     clock_gettime(CLOCK_MONOTONIC, &finish);
 
-    printMatrix(matC);
+    //printMatrix(matC);
 
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;

@@ -6,21 +6,21 @@ using namespace std;
 using matrix = vector<vector<int> >;
   
 // maximum size of matrix 
-#define MAX 50
+#define MAX 1000
   
 // maximum number of threads 
-#define MAX_THREAD 4
+#define MAX_THREAD 100
   
 matrix matA(MAX, vector<int>(MAX, 0));
 matrix matB(MAX, vector<int>(MAX, 0));
 matrix matC(MAX, vector<int>(MAX, 0));
-int step_i = 0; 
+int step = 0; 
 mutex m;
 
 void* multi(void* arg) 
 {   
     m.lock();
-    int core = step_i++; 
+    int core = step++; 
     m.unlock();
 
     // Each thread computes 1/MAX th of matrix multiplication 
@@ -44,7 +44,8 @@ int main()
             matB[i][j] = rand() % 100; 
         } 
     } 
-  
+    
+    /*
     // Displaying matA 
     cout << endl 
          << "Matrix A" << endl; 
@@ -63,6 +64,8 @@ int main()
         cout << endl; 
     } 
     
+    */
+
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     // declaring four threads 
@@ -83,6 +86,7 @@ int main()
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
 
+    /*
     // Displaying the result matrix 
     cout << endl 
          << "Multiplication of A and B" << endl; 
@@ -91,6 +95,7 @@ int main()
             cout << matC[i][j] << " ";         
         cout << endl; 
     }
+    */
 
     cout << "\nTotal Time : " << elapsed << " s" << endl;
 
