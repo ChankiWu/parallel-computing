@@ -8,7 +8,7 @@ using namespace std;
 // https://zh.cppreference.com/w/cpp/thread/thread
 
 bool isPrime(int n){
-    for(int i=3; i <= n/2;i += 2){
+    for(int i=2; i <= sqrt(n);i++){
         if(n % i == 0){
             return false;
         }
@@ -17,37 +17,41 @@ bool isPrime(int n){
 }
 
 void primePrint(){
-    long i = 3;
-    long limit = pow(10,10);
-    //long limit = 100;
+    long i = 2;
+    //long limit = pow(10,9);
+    long limit = 100;
 
     while(i < limit){
 
         if(isPrime(i)){
-            printf("%ld\n", i);
+            printf("%ld ", i);
         }
 
-        i += 2;
+        i += 1;
     }
 }
 
 int main(){
    
-	clock_t startTime,endTime;
+	struct timespec start, finish;
+    double elapsed;
 
-    startTime = clock();
+    clock_gettime(CLOCK_MONOTONIC, &start);
     primePrint();
-    endTime = clock();
+    clock_gettime(CLOCK_MONOTONIC, &finish);
 
-    double res = (double)(endTime - startTime) / CLOCKS_PER_SEC;
-    res = res / 60;
-    cout << "Total Time : " << res << " min" << endl;
+    elapsed = (finish.tv_sec - start.tv_sec);
+    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+
+    cout<< "\nTotal Time : " << elapsed << " s" << endl;
 
     //write the result
+    /*
     ofstream outfile;
     outfile.open("result.txt");
-    outfile<<"Single Thread: "<<res<<" min"<<endl;
+    outfile<<"Single Thread: "<<elapsed<<" s"<<endl;
     outfile.close();
+    */
 
     return 0;
 }

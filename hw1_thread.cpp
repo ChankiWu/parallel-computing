@@ -10,13 +10,13 @@
 
 using namespace std;
 
-long counter = 3;
-//long limit = 100;
-long limit = pow(10,10);
+long counter = 2;
+//long limit = pow(10,9);
+long limit = 100;
 mutex m;
 
 bool isPrime(int n){
-    for(int i=3; i <= n/2;i += 2){
+    for(int i=2; i <= sqrt(n);++i){
         if(n % i == 0){
             return false;
         }
@@ -34,7 +34,7 @@ void primePrint(){
         //safely increase the shared counter in this concurrent execution
         m.lock();
         x = counter;
-        counter += 2;
+        counter += 1;
         m.unlock();
 
         if(isPrime(x)){ 
@@ -55,7 +55,7 @@ int main(){
 
     clock_gettime(CLOCK_MONOTONIC, &start);
     
-    for(int i=0;i<8;i++){
+    for(int i=0;i<4;i++){
         tv.emplace_back(&primePrint);
     }
 
@@ -68,17 +68,17 @@ int main(){
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
 
-    elapsed = elapsed / 60;
-
-    cout << "\nTotal Time : " << elapsed << " min" << endl;
+    cout << "\nTotal Time : " << elapsed << " s" << endl;
 
     //write the result
 
+    /*
     ofstream outfile;
-    outfile.open("result_t8.txt");
+    outfile.open("result_t4.txt");
 
-    outfile<<"8 Thread: "<<elapsed<<" min"<<endl;
+    outfile<<"4 Thread: "<<elapsed<<" s"<<endl;
     outfile.close();
+    */
 
     return 0;
 }

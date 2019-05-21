@@ -6,10 +6,10 @@ using namespace std;
 using matrix = vector<vector<int> >;
   
 // maximum size of matrix 
-#define MAX 1000
+#define MAX 256
   
 // maximum number of threads 
-#define MAX_THREAD 100
+#define MAX_THREAD 256
   
 matrix matA(MAX, vector<int>(MAX, 0));
 matrix matB(MAX, vector<int>(MAX, 0));
