@@ -1,4 +1,4 @@
-# parallel-computing
+# Parallel-Computing
 Using C++ to do some experiments about parallel computing with multi-threads.
 
 + finds and prints all primes between 1 and pow(10,10). The task is to implement a parallel version of this program using threads and a concurrent data structure in C/C++.
